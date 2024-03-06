@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<JobsDBContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("JobsConnectionString")))
+options.UseSqlServer(builder.Configuration.GetConnectionString("JobsConnectionString")));
 
 var app = builder.Build();
 
