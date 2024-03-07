@@ -1,15 +1,18 @@
 ﻿using Jobs.API.Data;
 using Jobs.API.Models.Domain;
 using Jobs.API.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace Jobs.API.Controllers
 {
     //https://localhost:portnumber/api/v1/Jobs
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class JobsController : ControllerBase
     {
         //Db connection
