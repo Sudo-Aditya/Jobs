@@ -219,3 +219,5 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 #### UI
 
 ![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/dd18f7c4-d552-4279-976d-29e478eb2a7c)
+
+THANK YOU!
