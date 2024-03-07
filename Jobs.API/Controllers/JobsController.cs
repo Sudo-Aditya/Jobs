@@ -12,6 +12,7 @@ namespace Jobs.API.Controllers
     [ApiController]
     public class JobsController : ControllerBase
     {
+        //Db connection
         private readonly JobsDBContext dBContext;
 
         public JobsController(JobsDBContext context)
@@ -20,7 +21,7 @@ namespace Jobs.API.Controllers
         }
 
 
-
+        //method to generate random code
         public static string GenerateRandomCode()
         {
             // Create a Random object seeded with the current time for better randomness
@@ -40,7 +41,7 @@ namespace Jobs.API.Controllers
             return "JOB-" + new string(randomChars);
         }
 
-        //GET: https://localhost:portnumber/api/Jobs
+        //GET: https://localhost:portnumber/api/v1/Jobs
         [HttpPost]
         public async Task<IActionResult> CreateJob([FromBody] AddJob job)
         {
@@ -76,6 +77,7 @@ namespace Jobs.API.Controllers
                 jbDt); // Return the newly created job object
         }
 
+        //PUT: https://localhost:portnumber/api/v1/Jobs{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateJob(int id, AddJob job)
         {
@@ -104,6 +106,7 @@ namespace Jobs.API.Controllers
             return Ok(); // Return 204 No Content on successful update
         }
 
+        //Post: https://localhost:portnumber/api/v1/Jobs
         [HttpPost("list")]
         public async Task<IActionResult> GetJobs([FromBody] SearchJob request)
         {
@@ -150,6 +153,7 @@ namespace Jobs.API.Controllers
                             });
         }
 
+        //GET: https://localhost:portnumber/api/v1/Jobs
         [HttpGet("{id}")]
         public async Task<IActionResult> GetJob(int id)
         {
