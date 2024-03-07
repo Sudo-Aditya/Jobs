@@ -1,14 +1,8 @@
 # Dot Net Test 1
 
-## Instructions
-1. Complete the test, commit your code into a github repository and send us a link to the repository.
-2. Max time for the test is 4 hours.
-3. Use ASP.NET to build the below APIs - latest version recommended.
-5. Use database of your choice - database backup or scripts to generate the database with clear instructions to be included in your solution.
-6. Use of design patterns is recommended.
-7. Bonus points for unit tests.
-8. Bonus points for API documentation.
-9. Bonus points for token/oauth2/openidconnect authentication.
+### UI after Running Prject
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/23fcac00-9368-4b1b-9a30-13a4fb9e38af)
+
 
 ## Requirements
 
@@ -33,6 +27,16 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 201 http://localhost/api/v1/jobs/1055
 ```
 
+
+#### Result
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/49126bd9-c3e3-4cac-a374-a7a6da28c0e9)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/884556ba-6803-46e6-9402-0c5f7e6db84c)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/ae370f06-e6e4-4f7d-b5f7-26ceba1d0c01)
+
+
 ### Update API
 > PUT /api/v1/jobs/{id}
 
@@ -51,6 +55,16 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 ```
 200 OK
 ```
+
+
+#### Result
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/c262c89d-67f4-4314-a36d-121d069c3ef2)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/d83d39f3-be10-4632-ade2-b4824233693c)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/46d91742-0c1b-41c9-8d04-db270c8c23a3)
+
 
 ### List API
 > POST /api/jobs/list
@@ -93,6 +107,14 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 }
 ```
 
+
+#### Result
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/e4955b0a-2622-405d-a2d2-929d8e964eee)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/5f28fa5d-6c71-431c-bda6-34b96fe4691e)
+
+
 ### Details API
 > GET /api/v1/jobs/{id}
 
@@ -119,6 +141,13 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
   "closingDate": "2021-08-30T18:43:31.877Z"
 }
 ```
+
+####Result
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/f9abb1b6-e34d-4532-b998-40c4d0d53587)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/d458152d-04e3-49ea-ac14-d69891f5b9aa)
+
 
 ### Lookups / Masters
 #### Departments
