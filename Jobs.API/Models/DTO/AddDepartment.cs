@@ -2,5 +2,6 @@
 {
     public class AddDepartment
     {
+        public string Title { get; set; }
     }
 }
