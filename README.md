@@ -151,13 +151,44 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 
 ### Lookups / Masters
 #### Departments
+
+
 > POST /api/v1/departments
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/f96cb95f-6feb-488b-a53a-9d2565835c41)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/f1c87cdd-4a36-47dc-ab14-5f0654fe0957)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/b0d29923-935b-4f39-ad19-e55bf8e18b3a)
+
+
 
 > PUT /api/v1/departments/{id}
 
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/91ac7f85-5269-48b1-bbe6-032001e4dfe4)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/036d2361-2c0d-40db-a8e3-a47829b29e3d)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/323a677f-8f27-433b-9373-ed699feeae2e)
+
+
+
 > GET /api/v1/departments
 
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/0e7ef5dc-0860-4a57-9d2a-2e984d346305)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/ab6def91-dd60-4cdb-94d3-6b92367d5756)
+
+
+#### UI
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/1dec46a4-ac7c-4cda-977b-59dc223eeb71)
+
+
+
+
 #### Locations
+
 > POST /api/v1/locations
 
 ![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/7317f6b9-9fb5-4904-bd54-a95cd5cde4ab)
@@ -165,6 +196,7 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 ![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/ec5da6ce-6768-4d97-9230-83d9637d1620)
 
 ![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/1c64fd1f-1774-41b7-9763-69dbd1ccb98d)
+
 
 
 > PUT /api/v1/locations/{id}
@@ -175,11 +207,13 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 
 ![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/5076a4ff-cc11-45a5-8369-5d05a5646a1c)
 
+
 > GET /api/v1/locations
 
 ![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/b582ecea-9edd-4022-a8f8-084540e0a485)
  
 ![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/7e308124-4f7c-43f2-bfe1-3509f528fb63)
+
 
 
 #### UI
