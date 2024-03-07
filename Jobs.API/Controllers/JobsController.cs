@@ -1,5 +1,6 @@
 ﻿using Jobs.API.Data;
 using Jobs.API.Models.Domain;
+using Jobs.API.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace Jobs.API.Controllers
 
 
 
-        public static string GenerateJobId()
+        public static string GenerateRandomCode()
         {
             // Create a Random object seeded with the current time for better randomness
             Random random = new Random(DateTime.Now.Millisecond);
@@ -41,20 +42,38 @@ namespace Jobs.API.Controllers
 
         //GET: https://localhost:portnumber/api/Jobs
         [HttpPost]
-        public async Task<IActionResult> CreateJob(JobDepartmentLocatinLink job)
+        public async Task<IActionResult> CreateJob([FromBody] AddJob job)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState); // Return bad request if validation fails
             }
 
-            dBContext.Jobs.Add(job);
+            var jbMdel = new JobDepartmentLocatinLink
+            {
+                Title = job.Title,
+                Description = job.Description,
+                LocationId = job.LocationId,
+                DepartmentId = job.DepartmentId,
+                ClosingDate = job.ClosingDate,
+            };
+
+            dBContext.Jobs.Add(jbMdel);
             await dBContext.SaveChangesAsync();
 
-            return CreatedAtRoute(
+            var jbDt = new AddJob
+            {
+                Title = jbMdel.Title,
+                Description = jbMdel.Description,
+                LocationId = jbMdel.LocationId,
+                DepartmentId = jbMdel.DepartmentId,
+                ClosingDate = jbMdel.ClosingDate,
+            };
+
+            return CreatedAtAction(
                 "GetJob", // Name of the route for retrieving a specific job
-                new { id = job.Id }, // Route parameters
-                job); // Return the newly created job object
+                new { id = jbMdel.Id }, // Route parameters
+                jbDt); // Return the newly created job object
         }
 
         [HttpPut("{id}")]
@@ -98,41 +117,41 @@ namespace Jobs.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            //var query = _context.Jobs.AsQueryable();
+            var query = dBContext.Jobs.AsQueryable();
 
             // Apply filters based on request parameters
-            //if (!string.IsNullOrEmpty(request.Q))
-            //{
-            //    query = query.Where(j => j.Title.Contains(request.Q) || j.Description.Contains(request.Q));
-            //}
+            if (!string.IsNullOrEmpty(request.Q))
+            {
+                query = query.Where(j => j.Title.Contains(request.Q) || j.Description.Contains(request.Q));
+            }
 
-            //if (request.LocationId.HasValue)
-            //{
-            //    query = query.Where(j => j.LocationId == request.LocationId.Value);
-            //}
+            if (request.LocationId.HasValue)
+            {
+                query = query.Where(j => j.LocationId == request.LocationId.Value);
+            }
 
-            //if (request.DepartmentId.HasValue)
-            //{
-            //    query = query.Where(j => j.DepartmentId == request.DepartmentId.Value);
-            //}
+            if (request.DepartmentId.HasValue)
+            {
+                query = query.Where(j => j.DepartmentId == request.DepartmentId.Value);
+            }
 
             //// Pagination
-            //int total = await query.CountAsync();
-            //int skip = (request.PageNo - 1) * request.PageSize;
-            //query = query.Skip(skip).Take(request.PageSize);
+            int total = await query.CountAsync();
+            int skip = (request.PageNo - 1) * request.PageSize;
+            query = query.Skip(skip).Take(request.PageSize);
 
-            //var jobs = await query.Select(j => new JobListItem
-            //{
-            //    Id = j.Id,
-            //    Code = j.Code, // Assuming you have an auto-generated code field
-            //    Title = j.Title,
-            //    Location = j.Location.Title, // Assuming Location has a Title property
-            //    Department = j.Department.Title, // Assuming Department has a Title property
-            //    PostedDate = j.PostedDate,
-            //    ClosingDate = j.ClosingDate
-            //}).ToListAsync();
+            var jobs = await query.Select(j => new JobListItem
+            {
+                Id = j.Id,
+                Code = GenerateRandomCode(), // Assuming you have an auto-generated code field
+                Title = j.Title,
+                Location = j.Location.Title, // Assuming Location has a Title property
+                Department = j.Department.Title, // Assuming Department has a Title property
+                PostedDate = j.PostedDate,
+                ClosingDate = j.ClosingDate
+            }).ToListAsync();
 
-            return Ok(new { //total, data = jobs
+            return Ok(new { total, data = jobs
                             });
         }
 
@@ -152,7 +171,7 @@ namespace Jobs.API.Controllers
             return Ok(new JobDetailResponse
             {
                 Id = job.Id,
-                Code = GenerateJobId(), // Assuming you have an auto-generated code field
+                Code = GenerateRandomCode(), // Assuming you have an auto-generated code field
                 Title = job.Title,
                 Description = job.Description,
                 Location = new Location
