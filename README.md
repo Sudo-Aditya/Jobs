@@ -160,6 +160,28 @@ Teknorix wishes to build an api to manage their job openings. Build the below de
 #### Locations
 > POST /api/v1/locations
 
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/7317f6b9-9fb5-4904-bd54-a95cd5cde4ab)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/ec5da6ce-6768-4d97-9230-83d9637d1620)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/1c64fd1f-1774-41b7-9763-69dbd1ccb98d)
+
+
 > PUT /api/v1/locations/{id}
 
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/582a094f-2733-44d5-8669-d4437ac1bca3)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/7e643a6d-b494-481c-875f-d34bbf54f937)
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/5076a4ff-cc11-45a5-8369-5d05a5646a1c)
+
 > GET /api/v1/locations
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/b582ecea-9edd-4022-a8f8-084540e0a485)
+ 
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/7e308124-4f7c-43f2-bfe1-3509f528fb63)
+
+
+#### UI
+
+![image](https://github.com/Sudo-Aditya/Jobs/assets/81794467/dd18f7c4-d552-4279-976d-29e478eb2a7c)
