@@ -15,7 +15,7 @@ namespace Jobs.API.Data
         public DbSet<JobListItem> JobListItems { get; set; }
         public DbSet<JobListRequest> JobListRequests { get; set; }
         public DbSet<Location> Locations { get; set; }
-        //public DbSet<Jobs> Jobs { get; set; }
+        public DbSet<JobDepartmentLocatinLink> Jobs { get; set; }
 
     }
 }

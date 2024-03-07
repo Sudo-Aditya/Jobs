@@ -1,6 +1,6 @@
 ﻿namespace Jobs.API.Models.Domain
 {
-    public class Jobs
+    public class JobDepartmentLocatinLink
     {
         public int Id { get; set; }
         public string Title { get; set; }

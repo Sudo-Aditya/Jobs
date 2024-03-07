@@ -1,6 +1,8 @@
-﻿using Jobs.API.Models.Domain;
+﻿using Jobs.API.Data;
+using Jobs.API.Models.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jobs.API.Controllers
 {
@@ -9,30 +11,50 @@ namespace Jobs.API.Controllers
     [ApiController]
     public class JobsController : ControllerBase
     {
-        //private readonly TeknorixDbContext _context;
+        private readonly JobsDBContext dBContext;
 
-        //public JobsController(TeknorixDbContext context)
-        //{
-        //    _context = context;
-        //}
+        public JobsController(JobsDBContext context)
+        {
+            this.dBContext = context;
+        }
+
+
+
+        public static string GenerateJobId()
+        {
+            // Create a Random object seeded with the current time for better randomness
+            Random random = new Random(DateTime.Now.Millisecond);
+
+            // Define the character pool for generating the random string
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            // Generate the random 4-digit alphanumeric string
+            char[] randomChars = new char[4];
+            for (int i = 0; i < 4; i++)
+            {
+                randomChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            // Create the final job ID string
+            return "JOB-" + new string(randomChars);
+        }
 
         //GET: https://localhost:portnumber/api/Jobs
         [HttpPost]
-        public async Task<IActionResult> CreateJob(JobsController job)
+        public async Task<IActionResult> CreateJob(JobDepartmentLocatinLink job)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState); // Return bad request if validation fails
             }
-            return NotFound("Job not found.");
 
-            //_context.Jobs.Add(job);
-            //await _context.SaveChangesAsync();
+            dBContext.Jobs.Add(job);
+            await dBContext.SaveChangesAsync();
 
-            //return CreatedAtRoute(
-            //    "GetJob", // Name of the route for retrieving a specific job
-            //    new { id = job.Id }, // Route parameters
-            //    job); // Return the newly created job object
+            return CreatedAtRoute(
+                "GetJob", // Name of the route for retrieving a specific job
+                new { id = job.Id }, // Route parameters
+                job); // Return the newly created job object
         }
 
         [HttpPut("{id}")]
@@ -117,40 +139,39 @@ namespace Jobs.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetJob(int id)
         {
-            //var job = await _context.Jobs
-            //    .Include(j => j.Location)
-            //    .Include(j => j.Department)
-            //    .FirstOrDefaultAsync(j => j.Id == id);
+            var job = await dBContext.Jobs
+                .Include(j => j.Location)
+                .Include(j => j.Department)
+                .FirstOrDefaultAsync(j => j.Id == id);
 
-            //if (job == null)
-            //{
-            //    return NotFound("Job not found.");
-            //}
-            return NotFound("Job not found.");
+            if (job == null)
+            {
+                return NotFound("Job not found.");
+            }
 
-            //return Ok(new JobDetailResponse
-            //{
-            //    Id = job.Id,
-            //    Code = job.Code, // Assuming you have an auto-generated code field
-            //    Title = job.Title,
-            //    Description = job.Description,
-            //    Location = new Location
-            //    {
-            //        Id = job.Location.Id,
-            //        Title = job.Location.Title,
-            //        City = job.Location.City,
-            //        State = job.Location.State,
-            //        Country = job.Location.Country,
-            //        Zip = job.Location.Zip
-            //    },
-            //    Department = new Department
-            //    {
-            //        Id = job.Department.Id,
-            //        Title = job.Department.Title
-            //    },
-            //    PostedDate = job.PostedDate,
-            //    ClosingDate = job.ClosingDate
-            //});
+            return Ok(new JobDetailResponse
+            {
+                Id = job.Id,
+                Code = GenerateJobId(), // Assuming you have an auto-generated code field
+                Title = job.Title,
+                Description = job.Description,
+                Location = new Location
+                {
+                    Id = job.Location.Id,
+                    Title = job.Location.Title,
+                    City = job.Location.City,
+                    State = job.Location.State,
+                    Country = job.Location.Country,
+                   Zip = job.Location.Zip
+                },
+                Department = new Department
+                {
+                    Id = job.Department.Id,
+                    Title = job.Department.Title
+                },
+                PostedDate = job.PostedDate,
+                ClosingDate = job.ClosingDate
+            });
         }
     }
 }
