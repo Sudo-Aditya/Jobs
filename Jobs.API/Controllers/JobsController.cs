@@ -77,40 +77,35 @@ namespace Jobs.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateJob(int id, JobsController job)
+        public async Task<IActionResult> UpdateJob(int id, AddJob job)
         {
-            //if (id != job.Id)
-            //{
-            //    return BadRequest("Job ID in request body and URL do not match.");
-            //}
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            //var existingJob = await _context.Jobs.FindAsync(id);
+            var existingJob = await dBContext.Jobs.FindAsync(id);
 
-            //if (existingJob == null)
-            //{
-            //    return NotFound("Job not found.");
-            //}
+            if (existingJob == null)
+            {
+                return NotFound("Job not found.");
+            }
 
-            // Update properties of existingJob
-            //existingJob.Title = job.Title;
-            //existingJob.Description = job.Description;
-            //existingJob.LocationId = job.LocationId;
-            //existingJob.DepartmentId = job.DepartmentId;
-            //existingJob.ClosingDate = job.ClosingDate;
+             //Update properties of existingJob
+            existingJob.Title = job.Title;
+            existingJob.Description = job.Description;
+            existingJob.LocationId = job.LocationId;
+            existingJob.DepartmentId = job.DepartmentId;
+            existingJob.ClosingDate = job.ClosingDate;
 
-            //_context.Jobs.Update(existingJob);
-            //await _context.SaveChangesAsync();
+            dBContext.Jobs.Update(existingJob);
+            await dBContext.SaveChangesAsync();
 
-            return NoContent(); // Return 204 No Content on successful update
+            return Ok(); // Return 204 No Content on successful update
         }
 
         [HttpPost("list")]
-        public async Task<IActionResult> GetJobs([FromBody] JobListRequest request)
+        public async Task<IActionResult> GetJobs([FromBody] SearchJob request)
         {
             if (!ModelState.IsValid)
             {
