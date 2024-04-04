@@ -6,7 +6,7 @@
 
 ## Requirements
 
-Teknorix wishes to build an api to manage their job openings. Build the below described API endpoints
+An api to manage job openings. Build the below described API endpoints.
 
 ### Create API
 > POST /api/v1/jobs
